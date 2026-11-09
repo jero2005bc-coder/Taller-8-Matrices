@@ -1,0 +1,139 @@
+# EJERCICIO 1: ANALISIS DE UNA MATRIZ DE VENTAS
+
+ventas = [
+    [12, 15, 10, 18],
+    [8, 14, 16, 12],
+    [20, 18, 15, 22]
+]
+
+# 1. Mostrar la matriz completa
+print("=== MATRIZ DE VENTAS ===")
+
+for i in range(len(ventas)):
+    print(f"Vendedor {i + 1}: ", end="")
+    for j in range(len(ventas[i])):
+        print(f"Semana {j + 1}: {ventas[i][j]} millones", end=" | ")
+    print()
+
+
+# 2. Total de ventas por vendedor
+print("\n=== TOTAL POR VENDEDOR ===")
+
+totales_vendedores = []
+
+for i in range(len(ventas)):
+    total = 0
+    for j in range(len(ventas[i])):
+        total += ventas[i][j]
+
+    totales_vendedores.append(total)
+    print(f"Vendedor {i + 1}: {total} millones")
+
+
+# 3. Total de ventas por semana
+print("\n=== TOTAL POR SEMANA ===")
+
+totales_semanas = []
+
+for j in range(len(ventas[0])):
+    total = 0
+    for i in range(len(ventas)):
+        total += ventas[i][j]
+
+    totales_semanas.append(total)
+    print(f"Semana {j + 1}: {total} millones")
+
+
+# 4. Vendedor con mayor total
+mayor_vendedor = totales_vendedores[0]
+posicion_vendedor = 0
+
+for i in range(1, len(totales_vendedores)):
+    if totales_vendedores[i] > mayor_vendedor:
+        mayor_vendedor = totales_vendedores[i]
+        posicion_vendedor = i
+
+print(f"\nMayor vendedor: Vendedor {posicion_vendedor + 1}, con {mayor_vendedor} millones")
+
+
+# 5. Semana con mayor volumen de ventas
+mayor_semana = totales_semanas[0]
+posicion_semana = 0
+
+for j in range(1, len(totales_semanas)):
+    if totales_semanas[j] > mayor_semana:
+        mayor_semana = totales_semanas[j]
+        posicion_semana = j
+
+print(f"Semana con mayor venta: Semana {posicion_semana + 1}, con {mayor_semana} millones")
+
+
+# 6. Promedio general
+suma_general = 0
+cantidad_datos = 0
+
+for fila in ventas:
+    for valor in fila:
+        suma_general += valor
+        cantidad_datos += 1
+
+promedio = suma_general / cantidad_datos
+
+print(f"Promedio general: {promedio:.2f} millones")
+
+
+# 7. Modificar una venta
+print("\n=== MODIFICAR UNA VENTA ===")
+
+try:
+    vendedor = int(input("Ingrese el vendedor (1, 2 o 3): "))
+    semana = int(input("Ingrese la semana (1, 2, 3 o 4): "))
+
+    if 1 <= vendedor <= len(ventas) and 1 <= semana <= len(ventas[0]):
+
+        nuevo_valor = float(input("Ingrese el nuevo valor de la venta: "))
+
+        if nuevo_valor < 0:
+            print("El valor no puede ser negativo.")
+
+        else:
+            ventas[vendedor - 1][semana - 1] = nuevo_valor
+
+            print("\nMatriz actualizada:")
+
+            for i in range(len(ventas)):
+                print(f"Vendedor {i + 1}: {ventas[i]}")
+
+            print("\nNuevos totales por vendedor:")
+
+            for i in range(len(ventas)):
+                total = 0
+                for j in range(len(ventas[i])):
+                    total += ventas[i][j]
+
+                print(f"Vendedor {i + 1}: {total} millones")
+
+            print("\nNuevos totales por semana:")
+
+            for j in range(len(ventas[0])):
+                total = 0
+                for i in range(len(ventas)):
+                    total += ventas[i][j]
+
+                print(f"Semana {j + 1}: {total} millones")
+
+            suma_general = 0
+            cantidad_datos = 0
+
+            for fila in ventas:
+                for valor in fila:
+                    suma_general += valor
+                    cantidad_datos += 1
+
+            print(f"Nuevo promedio general: {suma_general / cantidad_datos:.2f} millones")
+
+    else:
+        print("Posicion invalida. Verifique vendedor y semana.")
+
+except ValueError:
+    print("Entrada invalida. Debe ingresar numeros.")
