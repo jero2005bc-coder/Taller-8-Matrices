@@ -1,0 +1,93 @@
+# EJERCICIO 2: ANALISIS DE PARTICIPACION EN CURSOS
+
+curso_A = {
+    "Ana", "Carlos", "Laura", "Pedro",
+    "Sofia", "Andres", "Camila"
+}
+
+curso_B = {
+    "Laura", "Pedro", "Daniel", "Sofia",
+    "Mateo", "Valentina"
+}
+
+
+# 1. Mostrar estudiantes de cada curso
+print("=== ESTUDIANTES POR CURSO ===")
+
+print("Curso A:", curso_A)
+print("Curso B:", curso_B)
+
+
+# 2. Cantidad de estudiantes diferentes
+todos = curso_A | curso_B
+
+print("\nCantidad de estudiantes diferentes:", len(todos))
+
+
+# 3. Estudiantes inscritos en ambos cursos
+ambos = curso_A & curso_B
+
+print("Inscritos en ambos cursos:", ambos)
+
+
+# 4. Estudiantes inscritos únicamente en el curso A
+solo_A = curso_A - curso_B
+
+print("Unicamente en el curso A:", solo_A)
+
+
+# 5. Estudiantes inscritos únicamente en el curso B
+solo_B = curso_B - curso_A
+
+print("Unicamente en el curso B:", solo_B)
+
+
+# 6. Estudiantes inscritos exactamente en uno de los cursos
+exactamente_uno = curso_A ^ curso_B
+
+print("Inscritos en exactamente un curso:", exactamente_uno)
+
+
+# 7. Determinar si todos los estudiantes de A están en B
+if curso_A.issubset(curso_B):
+    print("Todos los estudiantes del curso A tambien estan en el curso B.")
+else:
+    print("No todos los estudiantes del curso A estan en el curso B.")
+
+
+# 8. Agregar un nuevo estudiante
+print("\n=== AGREGAR ESTUDIANTE ===")
+
+nombre = input("Ingrese el nombre del estudiante: ").strip()
+
+if nombre:
+
+    curso = input("A que curso desea agregarlo? (A/B): ").strip().upper()
+
+    if curso == "A":
+        curso_A.add(nombre)
+        print(f"{nombre} fue agregado al curso A.")
+
+    elif curso == "B":
+        curso_B.add(nombre)
+        print(f"{nombre} fue agregado al curso B.")
+
+    else:
+        print("Curso invalido. No se agrego el estudiante.")
+
+    # Mostrar resultados actualizados
+    print("\nCurso A actualizado:", curso_A)
+    print("Curso B actualizado:", curso_B)
+
+    print("Cantidad actual de estudiantes diferentes:", len(curso_A | curso_B))
+
+    print("Ahora inscritos en ambos cursos:", curso_A & curso_B)
+
+    print("Ahora unicamente en A:", curso_A - curso_B)
+
+    print("Ahora unicamente en B:", curso_B - curso_A)
+
+    print("Ahora inscritos en exactamente uno:", curso_A ^ curso_B)
+
+else:
+    print("El nombre no puede estar vacio.")
